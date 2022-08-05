@@ -1,0 +1,124 @@
+ACCESSING LIVE FEED FROM WEBCAM
+Open PyCharm.
+
+Import cv2.
+
+Create variable to store video using VideoCapture() function.
+
+Pass parameter 0 in VideoCapture(0) to access webcam.
+
+Create an infinite while loop to display each frame of the webcam’s video continuously.
+
+Display the live feed using imshow() function.
+
+Add a delay of infinity using waitKey(0).
+
+import cv2
+Width = 640
+Height = 480
+cap = cv2.VideoCapture(0)
+cap.set(3, frameWidth)
+cap.set(4, frameHeight)
+cap.set(10, 150)
+while True:
+  success, img = cap.read()
+cv2.imshow("Result", img)
+break
+
+
+FUNCTIONS OF OPENCV
+CONVERTING IMAGE TO GRAYSCALE
+Open PyCharm.
+
+Import cv2.
+
+Create variable to store image using imread() function.
+
+To convert to grayscale use cv2.cvtColor() function
+
+Pass the parameter image location and COLOR_BGR2GRAY to convert.
+
+
+import cv2
+img = cv2.imread("Resources/lena.png")
+imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+cv2.imshow("Gray Image", imgGray)
+cv2.waitKey(0)
+
+
+EDGE DETECTION
+Open PyCharm.
+
+Import cv2.
+
+Create variable to store image using imread() function.
+
+To detect edge use cv2.Canny() function
+
+Pass the parameter image location and threshold to convert.
+
+
+import cv2
+
+img = cv2.imread("Resources/lena.png")
+imgCanny = cv2.Canny(img, 150, 200)
+cv2.imshow("Canny Image”, imgCanny)
+    cv2.waitKey(0)
+
+
+CROPPING IMAGE
+Import numpy and cv2.
+
+Create two variables to store the height and width of the image.
+
+Create two numpy arrays to store the coordinates.
+
+First array - store the coordinates of the image to be cropped.
+
+Second array - store the coordinates of the complete image.
+
+Crop the image using getPerspective() and wrapPerspective() function.
+
+
+image = cv2.imread("Assets/cards.jpg")
+
+width, height = 250, 350
+point1 = np.float32([[111, 219], [287, 188], [154, 482], [352, 440]])
+point2 = np.float32([[0, 0], [width, 0], [0, height], [width, height]])
+matrix = cv2.getPerspectiveTransform(point1, point2)
+Output = cv2.warpPerspective(image, matrix, (width, height))
+
+cv2.imshow("Image”, image)
+    cv2.imshow("Output”, Output)
+      cv2.waitKey(0)
+
+
+FACE DETECTION
+Open PyCharm.
+
+Import cv2.
+3.Create a variable to store cascade classifier (to learn more about cascade classifier click here.
+
+Convert image to greyscale using cv2.cvtColor() function.
+
+Detect face using detectMultiscale() function.
+
+Draw a rectangle around the detected face.
+
+
+import cv2
+
+face_Cascade = cv2.CascadeClassifier("Resources/haarcascade_frontalface_default.xml")
+
+image = cv2.imread('Resources/lena.png')
+imgGray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+faces = face_Cascade.detectMultiScale(imgGray, 1.1, 4)
+
+for (x, y, w, h) in faces:
+  cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
+
+cv2.imshow("Result", image)
+cv2.waitKey(0)
+
+
